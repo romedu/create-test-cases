@@ -4,11 +4,13 @@ describe("Create test cases function", () => {
 	const testData = [
 			{
 				inputs: [true],
-				expectedOutput: true
+				expectedOutput: true,
+				matchers: ["toBe"]
 			},
 			{
 				inputs: [false],
-				expectedOutput: false
+				expectedOutput: true,
+				matchers: ["not", "toBe"]
 			},
 			{
 				inputs: ["Hello"],
