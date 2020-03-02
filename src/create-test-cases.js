@@ -3,18 +3,24 @@ const createTestCases = (testData, fnToTest) => {
 		const { inputs, expectedOutput, matchers = ["toBe"] } = testCase,
 			currentDescribeLabel = `Input: ${JSON.stringify(...inputs)}`;
 
+		let matcherToUse;
+
 		describe(currentDescribeLabel, () => {
 			it(`should return ${expectedOutput}`, () => {
 				const output = fnToTest(...inputs),
-					expectationObj = expect(output),
-					expectationMatcher = matchers.reduce(
-						(expectation, nextMatcher) => {
-							return expectation[nextMatcher];
-						},
-						expectationObj
-					);
+					initialExpectator = expect(output),
+					expectator = matchers.reduce((expectator, nextMatcher) => {
+						const nextExpectator = expectator[nextMatcher],
+							isExpectatorAMatcher = typeof nextExpectator === "function";
 
-				expectationMatcher.call(expectationObj, expectedOutput);
+						if (!isExpectatorAMatcher) return nextExpectator;
+						else {
+							matcherToUse = nextExpectator;
+							return expectator;
+						}
+					}, initialExpectator);
+
+				matcherToUse.call(expectator, expectedOutput);
 			});
 		});
 	});
