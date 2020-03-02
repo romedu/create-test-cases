@@ -1,4 +1,4 @@
-const createTestCases = require("../create-test-cases");
+const createTestCases = require("../src/create-test-cases");
 
 describe("Create test cases function", () => {
 	const testData = [
