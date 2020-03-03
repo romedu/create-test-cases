@@ -1,13 +1,12 @@
 const createTestCases = (testData, fnToTest) => {
 	return testData.forEach(testCase => {
-		const { inputs, expectedOutput, testName, matchers = ["toBe"] } = testCase;
+		const { inputs, expectedOutput, matchers, testName } = testCase;
 		const currentDescribeLabel = `Input: ${JSON.stringify(...inputs)}`;
-		const currentTestName = testName || `should return ${expectedOutput}`;
 
 		let matcherToUse;
 
 		describe(currentDescribeLabel, () => {
-			it(currentTestName, () => {
+			it(testName, () => {
 				const output = fnToTest(...inputs);
 				const initialExpectator = expect(output);
 				const expectator = matchers.reduce((expectator, nextMatcher) => {

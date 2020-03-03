@@ -1,27 +1,14 @@
 const createTestCases = require("../src/create-test-cases");
+const TestCase = require("../src/TestCase");
 
 describe("Create test cases function", () => {
 	const testData = [
-			{
-				inputs: [true],
-				expectedOutput: true,
-				matchers: ["toBe"]
-			},
-			{
-				inputs: [false],
-				expectedOutput: true,
-				matchers: ["not", "toBe"]
-			},
-			{
-				inputs: ["Hello"],
-				expectedOutput: "Hello"
-			},
-			{
-				inputs: [44],
-				expectedOutput: 44
-			}
-		],
-		testFunction = input => input;
+		new TestCase([true], true, ["toBe"]),
+		new TestCase([false], true, ["not", "toBe"]),
+		new TestCase(["Hello"], "Hello"),
+		new TestCase([44], 44)
+	];
+	const testFunction = input => input;
 
 	createTestCases(testData, testFunction);
 });
