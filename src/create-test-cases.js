@@ -1,7 +1,10 @@
+const { createInputsString } = require("./utilities");
+
 const createTestCases = (testData, fnToTest) => {
 	return testData.forEach(testCase => {
 		const { inputs, expectedOutput, matchers, testName } = testCase;
-		const currentDescribeLabel = `Input: ${JSON.stringify(...inputs)}`;
+		const inputsString = createInputsString(inputs);
+		const currentDescribeLabel = `Input: (${inputsString})`;
 
 		let matcherToUse;
 
