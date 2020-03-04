@@ -1,3 +1,4 @@
-const createTestCases = require("./create-test-cases");
+exports.createTestCases = require("./create-test-cases");
+exports.TestCase = require("./TestCase");
 
-module.exports = createTestCases;
+module.exports = exports;
