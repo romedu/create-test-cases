@@ -14,7 +14,7 @@ $ npm install create-test-cases
 ## API
 
 ```js
-const createTestCases = require("create-test-cases");
+const { createTestCases, TestCase } = require("create-test-cases");
 ```
 
 ### createTestCases(testData, fnToTest)
@@ -23,9 +23,18 @@ Will create a describe blocks specifying all of the parameters passed to the fun
 for each of the test cases displaying the expected return value.
 **Note:** It is advised to call the function inside of a describe block.
 
-#### testData
+##### testData
 
-The testData parameter is an array of test cases objects, said objects may contain the following keys:
+The testData parameter is an array of TestCase instance objects.
+
+##### fnToTest
+
+Function in which the test cases will be based.
+
+### TestCase(inputs, expectedOutput, matchers, testName)
+
+Will create an instance of the TestCase "class".
+**Note:** Calling the function with the `new` keyword is not required.
 
 ##### inputs
 
@@ -37,34 +46,23 @@ Expected return value from the currently testing function
 
 ##### matchers
 
-Array of matchers to be used in the test case. **Default:** ["toBe"].
+Array of matchers to be used in the test case. **Default:** `["toBe"]`.
 **Note:** Check your framework's documentation to see a list of the valid matchers.
 
-#### fnToTest
+##### testName
 
-Function in which the test cases will be based.
+String to be used as the name of the test. **Default:** `"should return " + expectedOutput`.
 
 ## Examples
 
 This example demonstrates how to create test cases using the createTestCases function.
 
 ```js
-const createTestCases = require("create-test-cases");
+const { createTestCases, TestCase } = require("create-test-cases");
 const testData = [
-	{
-		inputs: [true],
-		expectedOutput: true,
-		matchers: ["toBe"]
-	},
-	{
-		inputs: [false],
-		expectedOutput: true,
-		matchers: ["not", "toBe"]
-	},
-	{
-		inputs: ["Hello"],
-		expectedOutput: "Hello"
-	}
+	new TestCase([true], true, ["toBe"]),
+	new TestCase([false], true, ["not", "toBe"]),
+	new TestCase(["Hello"], "Hello")
 ];
 
 const testFunction = input => input;
