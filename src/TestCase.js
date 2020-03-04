@@ -1,14 +1,16 @@
 "use strict";
 
 function TestCase(inputs, expectedOutput, matchers, testName) {
-	const newTestCase = this || {};
+	const wasCalledWithNewKeyword = !!this;
 
-	newTestCase.inputs = inputs;
-	newTestCase.expectedOutput = expectedOutput;
-	newTestCase.matchers = matchers || ["toBe"];
-	newTestCase.testName = testName || `should return ${newTestCase.expectedOutput}`;
+	if (!wasCalledWithNewKeyword) return new TestCase(...arguments);
 
-	return newTestCase;
+	this.inputs = inputs;
+	this.expectedOutput = expectedOutput;
+	this.matchers = matchers || ["toBe"];
+	this.testName = testName || `should return ${this.expectedOutput}`;
+
+	return this;
 }
 
 module.exports = TestCase;
