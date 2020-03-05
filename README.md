@@ -1,5 +1,7 @@
 # create-test-cases
 
+[![travis-build][travis-shield-image]][travis-url] [![npm-version][npm-shield-image]][npm-url] [![npm-license][license-shield-image]](LICENSE)
+
 Node.js function that creates test cases based on the specified inputs and outputs.
 Decrease the time taken to write simple test cases using this framework agnostic function.
 
@@ -73,3 +75,9 @@ createTestCases(testData, testFunction);
 ## License
 
 [MIT](LICENSE)
+
+[travis-shield-image]: https://travis-ci.com/romedu/create-test-cases.svg?token=1L9gJ24KwcP86SaRyfTy&branch=master
+[travis-url]: https://travis-ci.com/romedu/create-test-cases
+[npm-shield-image]: https://img.shields.io/npm/v/create-test-cases
+[npm-url]: https://www.npmjs.com/package/create-test-cases
+[license-shield-image]: https://img.shields.io/npm/l/create-test-cases
